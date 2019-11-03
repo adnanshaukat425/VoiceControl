@@ -11,6 +11,9 @@ using System.Speech.Recognition;
 using System.Speech.Synthesis;
 using System.Diagnostics;
 using System.Globalization;
+using Google.Apis.Auth.OAuth2;
+using System.IO;
+using Google.Cloud.TextToSpeech.V1;
 
 namespace VoiceControl
 {
@@ -42,6 +45,8 @@ namespace VoiceControl
             speechRecongnitionEngine.SpeechRecognized += SpeechRecongnitionEngine_SpeechRecognized;
             speechRecongnitionEngine.SpeechRecognitionRejected += SpeechRecongnitionEngine_SpeechRecognitionRejected;
             speechRecongnitionEngine.RecognizeAsync(RecognizeMode.Multiple);
+
+            //speechSynthesizer.SetOutputToWaveFile("sample_file.wav");
         }
 
         private void SpeechRecongnitionEngine_SpeechRecognitionRejected(object sender, SpeechRecognitionRejectedEventArgs e)
@@ -141,12 +146,12 @@ namespace VoiceControl
                     Environment.Exit(0);
                     recognized.Add(command, true);
                     break;
-                case "stop listening":
-                case "stop listening to me":
-                    speechSynthesizer.Speak("Okay I will not listen to you now");
-                    speechRecongnitionEngine.RecognizeAsyncStop();
-                    recognized.Add(command, true);
-                    break;
+                //case "stop listening":
+                //case "stop listening to me":
+                //    speechSynthesizer.Speak("Okay I will not listen to you now");
+                //    speechRecongnitionEngine.RecognizeAsyncStop();
+                //    recognized.Add(command, true);
+                //    break;
                 default:
                     //MessageBox.Show("Command unrecognized, Please try again!");
                     break;
